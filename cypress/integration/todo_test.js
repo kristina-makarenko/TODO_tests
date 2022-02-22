@@ -1,10 +1,13 @@
 /// <reference types="cypress" />
 
+import {BeforeEachfun} from "../pages/beforeEach_page"
+const beforeEachfun = new BeforeEachfun()
+
 describe('Tests for TODO', () => {
 
     beforeEach(() => {
-        cy.viewport(1280,720)
-        cy.visit('https://todomvc.com/examples/react/#/')
+        beforeEachfun.viewport();
+        beforeEachfun.visit('https://todomvc.com/examples/react/#/');
     })
 
     it('Every basic elements exist', () => {
