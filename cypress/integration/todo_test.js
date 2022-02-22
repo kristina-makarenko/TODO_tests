@@ -37,6 +37,42 @@ describe('Tests for TODO', () => {
 
     })
 
+    it('Select all actions and deselect all', () => {  
+        cy.contains('go to the gym').should('not.exist')
+        cy.contains('feed the dog').should('not.exist')
+        cy.contains('buy products').should('not.exist')
+
+        cy.get('.new-todo').type('go to the gym{enter}')
+        cy.get('.new-todo').type('feed the dog{enter}')
+        cy.get('.new-todo').type('buy products{enter}')
+
+        cy.contains('go to the gym').should('exist')
+        cy.contains('feed the dog').should('exist')
+        cy.contains('buy products').should('exist')
+
+        cy.contains('All').should('exist')
+        cy.contains('Active').should('exist')
+        cy.contains('Completed').should('exist')
+
+        cy.get('[for="toggle-all"]').click()
+
+        cy.get('[data-reactid=".0.2.1.4"] > a').click()
+
+        cy.contains('go to the gym').should('exist')
+        cy.contains('feed the dog').should('exist')
+        cy.contains('buy products').should('exist')
+        cy.contains('0 items left').should('exist')
+        cy.contains('Clear completed').should('exist')
+
+        cy.get('[for="toggle-all"]').click()
+        cy.contains('go to the gym').should('not.exist')
+        cy.contains('feed the dog').should('not.exist')
+        cy.contains('buy products').should('not.exist')
+        cy.contains('3 items left').should('exist')
+        cy.contains('Clear completed').should('not.exist')
+
+    })
+
     it('Double-click to edit a todo action', () => {
         cy.contains('go to the gym').should('not.exist')
         cy.get('.new-todo').type('go to the gym{enter}')
