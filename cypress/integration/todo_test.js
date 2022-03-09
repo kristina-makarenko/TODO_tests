@@ -2,6 +2,7 @@
 
 import {BeforeEachfun} from "../pages/beforeEach_page"
 import {BasicElements} from "../pages/BasicElements"
+import {AddedActions} from "../pages/AddedActions"
 
 describe('Tests for TODO', () => {
 
@@ -22,23 +23,11 @@ describe('Tests for TODO', () => {
 
 
     it('Actions are added', () => {  
-        cy.contains('go to the gym').should('not.exist')
-        cy.contains('feed the dog').should('not.exist')
-        cy.contains('buy products').should('not.exist')
-
-        cy.get('.new-todo').type('go to the gym{enter}')
-        cy.get('.new-todo').type('feed the dog{enter}')
-        cy.get('.new-todo').type('buy products{enter}')
-
-        cy.contains('go to the gym').should('exist')
-        cy.contains('feed the dog').should('exist')
-        cy.contains('buy products').should('exist')
-
-        cy.contains('All').should('exist')
-        cy.contains('Active').should('exist')
-        cy.contains('Completed').should('exist')
-
-
+        const added = new AddedActions();
+        added.checkActionsNotExist();
+        added.addActions();
+        added.checkActionsExist();
+        added.checkFiltersExist();
     })
 
     it('Select all actions and deselect all', () => {  
