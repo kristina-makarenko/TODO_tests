@@ -1,7 +1,7 @@
 export class BeforeEachfun{
 
-    viewport() {
-        cy.viewport(1280,720)
+    viewport(d,w) {
+        cy.viewport(d,w)
     }
 
     visit(url) {
