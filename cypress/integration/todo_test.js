@@ -1,22 +1,23 @@
 /// <reference types="cypress" />
 
 import {BeforeEachfun} from "../pages/beforeEach_page"
-const beforeEachfun = new BeforeEachfun()
+import {BasicElements} from "../pages/BasicElements"
 
 describe('Tests for TODO', () => {
 
     beforeEach(() => {
-        beforeEachfun.viewport();
+        const beforeEachfun = new BeforeEachfun();
+        beforeEachfun.viewport(1280,720);
         beforeEachfun.visit('https://todomvc.com/examples/react/#/');
     })
 
     it('Every basic elements exist', () => {
-        cy.contains('todos').should('have.text','todos')
-        cy.get('.new-todo').invoke('attr','placeholder').should('contain','What needs to be done?')
-        cy.contains('Double-click to edit a todo').should('have.text','Double-click to edit a todo')
-        cy.contains('Created by petehunt').should('have.text','Created by petehunt')
-        cy.contains('Part of TodoMVC').should('have.text','Part of TodoMVC')
-
+        const basicElements = new BasicElements();
+        basicElements.checkTODO('todos');
+        basicElements.checkPlaceholder('What needs to be done?');
+        basicElements.checkEdit('Double-click to edit a todo');
+        basicElements.checkPetehunt('Created by petehunt');
+        basicElements.checkTodoMVС('Part of TodoMVC');
     })
 
 
